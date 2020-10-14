@@ -7,35 +7,26 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var counter: Int = 0
-    private var start: Boolean = false
+    private var number1: Int = 6
+    private var number2: Int = 6
+
+    //private var text: String = "В магазине осталось $number1 яблок"
+    private var text: String = "В магазине <осталось> ${getNumber()} яблок"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var sum: Int = getNumber()
+        //tvText.text = sum.toString()
+        tvText.text = text
 
-        Thread {
-            start = true
-            while (start) {
-                Thread.sleep(1000)
-                runOnUiThread {
-                    if (counter == 5) {
-                        cLayout.setBackgroundColor(Color.BLUE)
-                    }
-                    tvText.text = counter.toString()
-                    counter++
-                    
-                }
-            }
-
-
-        }.start()
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        start = false
+    private fun getNumber(): Int {
+        return number1 + number2
     }
+
+
 }
